@@ -14,4 +14,4 @@ After you have set the terminal in the right path of your device, execute the fi
     - Enter the total cost of control for this event.
 - Repeat as many times as the number of risks you want to simulate.
 
-And that's it, you will then get some relevent data in the terminal plus a graph will pop up showing two loss exceedance curves; one of the inherent loss and the other of the residual risk.
+And that's it, you will then get some relevent data in the terminal plus, by default, a graph will pop up showing two loss exceedance curves; one of the inherent loss and the other of the residual risk.
