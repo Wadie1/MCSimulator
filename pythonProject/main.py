@@ -6,6 +6,8 @@ from event import *
 from montecarlo_simulation import *
 from lec import plot_graph
 
+import numpy
+
 
 def main():
     global control_eff, result_residual_list
@@ -33,15 +35,21 @@ def main():
     for event in risk_list:
         print('expected residual loss : ', event.expected_residual_loss(), 'Return on Control : ', event.roc())
 
-    # Monte Carlo simulation
+    """Monte Carlo simulation"""
     result_losses_list = mc_simulation(risk_list, True)
     if control_eff:
         result_residual_list = mc_simulation(risk_list, False)
 
-    # Plotting the lec graph
+    """Important computed data"""
+    print('Relevant computed data')
+    print('Mean : ', numpy.mean(result_losses_list))
+    print('Median : ', numpy.median(result_losses_list))
+    print('Standard deviation : ', numpy.std(result_losses_list))
+
+    """Plotting the lec graph"""
     plot_graph(result_losses_list, not control_eff)
 
-    # Plotting Residual risk plot
+    """Plotting Residual risk plot"""
     if control_eff:
         plot_graph(result_residual_list)
 
