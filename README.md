@@ -7,7 +7,7 @@ After you have set the terminal in the right path of your device, execute the fi
 - Then, for each event:
 -      Enter its Likelihood:  it's the estimatinon of the probability of the event occurring in a year (it has to be beteween 0 and 1).
 -      Estimating a 90% confidence interval for a monetized loss. Example: “If event X occurs, there is a 90% chance the loss will be between $1 million and $8 million.” For that :
--                   Enter its Lower Bound.
+*  Enter its Lower Bound.
 -                   Then its Upper Bound.
 -      (Optional) Estimating the mitigation control effectiveness. For that :
 -                   Enter the effectiveness of the control (it has to be beteween 0 and 1)
