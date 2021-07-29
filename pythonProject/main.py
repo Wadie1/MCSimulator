@@ -2,35 +2,45 @@
 # Can evaluate n events and optionally their residual risk
 # Events are supposed independent in this model
 
+
 from event import *
 from montecarlo_simulation import *
 from lec import plot_graph
 
 import numpy
+import pandas as pd
 
 
 def main():
     global control_eff, result_residual_list
     risk_list = []
-    n_risks = int(input('enter the number of risks you want to enter: '))
+    csv = input('Do you want to enter data manually ? y/n ')
+    if csv == 'n':
+        risk_list_csv = pd.read_csv('test.csv', sep=";").head()
+        for _, risk in risk_list_csv.iterrows():
+            risk = Event(risk['Name'], risk["likelihood"], risk["lb"], risk["ub"], risk["control_eff"], risk["cost_of_control"])
+            risk_list.append(risk)
+            control_eff = True
 
-    while n_risks:
-        print('enter the data of your risk')
-        likelihood = float(input('enter its likelihood : '))
-        lb = int(input('enter its lower bound : '))
-        ub = int(input('enter its upper bound : '))
-        control_eff = raw_input('enter control effectiveness (Optional): ')
-        if control_eff == '':
-            control_eff = False
-        else:
-            control_eff = float(control_eff)
-        if not control_eff:
-            risk = Event(likelihood, lb, ub)
-        else:
-            cost_of_control = int(input('enter total cost of control (Optional): '))
-            risk = Event(likelihood, lb, ub, control_eff, cost_of_control)
-        risk_list.append(risk)
-        n_risks -= 1
+    else:
+        n_risks = int(input('enter the number of risks you want to enter: '))
+        while n_risks:
+            print('enter the data of your risk')
+            likelihood = float(input('enter its likelihood : '))
+            lb = int(input('enter its lower bound : '))
+            ub = int(input('enter its upper bound : '))
+            control_eff = input('enter control effectiveness (Optional): ')
+            if control_eff == '':
+                control_eff = False
+            else:
+                control_eff = float(control_eff)
+            if not control_eff:
+                risk = Event(likelihood, lb, ub)
+            else:
+                cost_of_control = int(input('enter total cost of control (Optional): '))
+                risk = Event(likelihood, lb, ub, control_eff, cost_of_control)
+            risk_list.append(risk)
+            n_risks -= 1
 
     for event in risk_list:
         print('expected residual loss : ', event.expected_residual_loss(), 'Return on Control : ', event.roc())

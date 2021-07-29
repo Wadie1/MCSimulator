@@ -22,7 +22,7 @@ def plot_graph(result_losses_list, show_graph=True):
     result_array = np.array(result_losses_list)
     hist, edges = np.histogram(result_array, bins=40)
     cumrev = np.cumsum(hist[::-1])[::-1] * 100 / mcs.MC_COUNTER
-    plt.xscale('log')
+    #plt.xscale('log')
     if show_graph:
         plt.plot(edges[:-1], cumrev, label='residual')  # edges huwa axe x, cumrev axes y
     else:

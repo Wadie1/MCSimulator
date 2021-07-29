@@ -4,7 +4,7 @@ from scipy.stats import lognorm
 
 class Event:
 
-    def __init__(self, likelihood, lb, ub, control_eff=0, cost_of_control=0, name=None):
+    def __init__(self, name,likelihood, lb, ub, control_eff=0, cost_of_control=0):
         self.name = name
         self.likelihood = likelihood
         self.lb = lb
