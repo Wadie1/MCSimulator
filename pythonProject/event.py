@@ -4,7 +4,7 @@ from scipy.stats import lognorm
 
 class Event:
 
-    def __init__(self, name,likelihood, lb, ub, control_eff=0, cost_of_control=0):
+    def __init__(self,likelihood, lb, ub, control_eff=0, cost_of_control=0, name=None):
         self.name = name
         self.likelihood = likelihood
         self.lb = lb
@@ -37,7 +37,7 @@ class Event:
         if pb >= self.control_eff:
             sil = 0
         else:
-            sil = lognorm.ppf(pb, 0.02896965951, loc=0, scale=self.cost_of_control)
+            sil = lognorm.ppf(pb, 0.42896965951, loc=0, scale=self.cost_of_control)
         return sil
 
     def roc(self):

@@ -24,7 +24,7 @@ def plot_graph(result_losses_list, show_graph=True):
     cumrev = np.cumsum(hist[::-1])[::-1] * 100 / mcs.MC_COUNTER
     #plt.xscale('log')
     if show_graph:
-        plt.plot(edges[:-1], cumrev, label='residual')  # edges huwa axe x, cumrev axes y
+        plt.plot(edges[:-1], cumrev, label='residual')
     else:
         plt.plot(edges[:-1], cumrev, label='inherent')
     plt.grid(which="both")

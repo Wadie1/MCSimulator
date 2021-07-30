@@ -15,14 +15,7 @@ def main():
     global control_eff, result_residual_list
     risk_list = []
     csv = input('Do you want to enter data manually ? y/n ')
-    if csv == 'n':
-        risk_list_csv = pd.read_csv('test.csv', sep=";").head()
-        for _, risk in risk_list_csv.iterrows():
-            risk = Event(risk['Name'], risk["likelihood"], risk["lb"], risk["ub"], risk["control_eff"], risk["cost_of_control"])
-            risk_list.append(risk)
-            control_eff = True
-
-    else:
+    if csv == 'y':
         n_risks = int(input('enter the number of risks you want to enter: '))
         while n_risks:
             print('enter the data of your risk')
@@ -30,20 +23,26 @@ def main():
             lb = int(input('enter its lower bound : '))
             ub = int(input('enter its upper bound : '))
             control_eff = input('enter control effectiveness (Optional): ')
-            if control_eff == '':
-                control_eff = False
-            else:
+            if control_eff:
                 control_eff = float(control_eff)
-            if not control_eff:
-                risk = Event(likelihood, lb, ub)
-            else:
                 cost_of_control = int(input('enter total cost of control (Optional): '))
                 risk = Event(likelihood, lb, ub, control_eff, cost_of_control)
+            else:
+                control_eff = False
+                risk = Event(likelihood, lb, ub)
             risk_list.append(risk)
             n_risks -= 1
 
+    else:
+        risk_list_csv = pd.read_csv('test.csv', sep=";").head()
+        for _, risk in risk_list_csv.iterrows():
+            control_eff = risk["control_eff"]
+            risk = Event(risk["likelihood"], risk["lb"], risk["ub"], risk["control_eff"],
+                         risk["cost_of_control"], risk['Name'])
+            risk_list.append(risk)
+
     for event in risk_list:
-        print('expected residual loss : ', event.expected_residual_loss(), 'Return on Control : ', event.roc())
+        print(event.name, '-> expected residual loss : ', event.expected_residual_loss(), 'Return on Control : ', event.roc())
 
     """Monte Carlo simulation"""
     result_losses_list = mc_simulation(risk_list, True)
