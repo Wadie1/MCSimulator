@@ -1,3 +1,4 @@
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import montecarlo_simulation as mc
@@ -18,6 +19,7 @@ def index(hist):
 # LEC plot
 def plot_graph(result_losses_list, show_graph=True):
     """Plots the loss exceedance curve from a nparray of Monte Carlo results"""
+    # fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
     mcs = mc.MonteCarlo_simulation()
     result_array = np.array(result_losses_list)
     hist, edges = np.histogram(result_array, bins=40)
@@ -32,5 +34,5 @@ def plot_graph(result_losses_list, show_graph=True):
     plt.xlim(left=edges[index(hist[1:])])
     #right = edges[-1]
     plt.legend()
-    if show_graph:
-        plt.show()
+    fig = plt.gcf()
+    return fig

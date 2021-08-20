@@ -1,7 +1,7 @@
-Name;likelihood;lb;ub;control_eff;cost_of_control
-Ransomware;0.8;100000;250000;0.6;80000
-Forced Authentification ;0.25;200000;500000;0.25;50000
-Phishing;0.45;150000;300000;0.5;25000
-Insider threat;0.5;200000;500000;0.1;10000
-Man-in-the-Midddle;0.2;300000;650000;0.4;100000
-Malware attack;0.6;450000;500000;0.3;200000
+Name;likelihood;lb;ub;control_eff;cost_of_control_lb;cost_of_control_ub
+Ransomware;0.2;100000;250000;0.15;75000;85000
+Forced Authentication;0.25;200000;500000;0.2;45000;55000
+Phishing;0.45;150000;300000;0.3;20000;25000
+Insider threat;0.5;200000;500000;0.1;5000;13000
+Man-in-the-Middle;0.6;300000;650000;0.25;50000;140000
+Malware attack;0.6;450000;500000;0.3;150000;200000
